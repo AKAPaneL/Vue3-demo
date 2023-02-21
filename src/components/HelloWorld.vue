@@ -7,6 +7,9 @@ const obj = reactive({
   name:'~'
 })
 
+setTimeout(() => {
+  console.log(obj,msg);
+}, 1000);
 const emit = defineEmits(['changeMsg'])
 
 const setMsg = ()=>{

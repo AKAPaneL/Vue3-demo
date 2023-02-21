@@ -2,15 +2,25 @@
 import HelloWorld from './components/HelloWorld.vue'
 import ComputedTest from './components/ComputedTest.vue';
 import WatchTest from './components/WatchTest.vue';
-import { ref } from 'vue';
+import Provide from './components/provide/index.vue'
+import Practice from './components/provide/Parctice/Practice.vue';
+import { ref,provide } from 'vue';
 
 const HW = ref(null)
+
+const provideData = ref(123)
+const setProvideData = () => {
+  provideData.value = 789
+}
 const handle = ()=>{
   HW.value.changeObjName()
 }
 const onMsgChange = (v) => {
   console.log('子组件触发事件，发过来的数据为：',v);
 }
+provide('provideData',provideData)
+provide('setProvideData',setProvideData)
+
 </script>
 
 <template>
@@ -18,6 +28,9 @@ const onMsgChange = (v) => {
   <ComputedTest></ComputedTest>
   <WatchTest></WatchTest>
   <button @click="handle">调用子组件函数</button>
+  <div>app根实例:provide:{{ provideData }}</div>
+  <Provide></Provide>
+  <Practice/>
 </template>
 
 <style scoped>
@@ -26,11 +39,5 @@ const onMsgChange = (v) => {
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
